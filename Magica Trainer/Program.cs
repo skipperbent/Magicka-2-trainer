@@ -132,6 +132,30 @@ namespace MagicaTrainer
 
 					int pointer = Trainer.ReadMultiLevelPointer("magicka2", baseAddr + 0x4611C4, 4, new[] {0x7b8, 0x68c, 0x14, 0x60});
 					Config.Health = Trainer.ReadDouble("magicka2", pointer);
+
+					if (Math.Abs(Config.Health) <= 0)
+					{
+						pointer = Trainer.ReadMultiLevelPointer("magicka2", baseAddr + 0x000F2A20, 4, new[] { 0x404, 0x58c, 0xcc, 0x194, 0x120 });
+						Config.Health = Trainer.ReadDouble("magicka2", pointer);
+					}
+
+					if (Math.Abs(Config.Health) <= 0)
+					{
+						pointer = Trainer.ReadMultiLevelPointer("magicka2", baseAddr + 0x000F2A20, 4, new[] { 0x404, 0x58c, 0xcc, 0x194, 0x120 });
+						Config.Health = Trainer.ReadDouble("magicka2", pointer);
+					}
+
+					if (Math.Abs(Config.Health) <= 0)
+					{
+						pointer = Trainer.ReadMultiLevelPointer("magicka2", baseAddr + 0x000F2A20, 4, new[] { 0x420, 0x5ac, 0xcc, 0x194, 0x120 });
+						Config.Health = Trainer.ReadDouble("magicka2", pointer);
+					}
+
+					if (Math.Abs(Config.Health) <= 0)
+					{
+						pointer = Trainer.ReadMultiLevelPointer("magicka2", baseAddr + 0x000F2A20, 4, new[] { 0x420, 0x5ac, 0xcc, 0x194, 0x120 });
+						Config.Health = Trainer.ReadDouble("magicka2", pointer);
+					}
 					
 					// Only write when the information is availible, otherwise the system might
 					// see the memory as unavailible and use different slots.
@@ -147,8 +171,11 @@ namespace MagicaTrainer
 						Trainer.WriteDouble("magicka2", pointer, 1000);
 					}
 
-					// Speed hack
-					Trainer.WriteDouble("magicka2", pointer + 0x00F0, (Config.EnableSpeedHack) ? Config.Speed : _speedDefaultValue);
+					if (Config.Health > 0)
+					{
+						// Speed hack
+						Trainer.WriteDouble("magicka2", pointer + 0x00F0, (Config.EnableSpeedHack) ? Config.Speed : _speedDefaultValue);
+					}
 				}
 			}
 		}
