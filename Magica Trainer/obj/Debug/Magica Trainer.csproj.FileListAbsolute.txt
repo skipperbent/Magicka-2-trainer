@@ -1,0 +1,5 @@
+D:\Visual Studio\Magica Trainer\Magica Trainer\obj\Debug\Magica Trainer.csprojResolveAssemblyReference.cache
+D:\Visual Studio\Magica Trainer\Magica Trainer\bin\Debug\Magica 2 Trainer.exe
+D:\Visual Studio\Magica Trainer\Magica Trainer\bin\Debug\Magica 2 Trainer.pdb
+D:\Visual Studio\Magica Trainer\Magica Trainer\obj\Debug\Magica 2 Trainer.exe
+D:\Visual Studio\Magica Trainer\Magica Trainer\obj\Debug\Magica 2 Trainer.pdb
