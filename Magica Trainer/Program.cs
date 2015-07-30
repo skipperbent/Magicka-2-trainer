@@ -132,27 +132,23 @@ namespace MagicaTrainer
 
 					int pointer = Trainer.ReadMultiLevelPointer("magicka2", baseAddr + 0x4611C4, 4, new[] {0x7b8, 0x68c, 0x14, 0x60});
 					Config.Health = Trainer.ReadDouble("magicka2", pointer);
-					var speed = Trainer.ReadDouble("magicka2", pointer + 0x00F0);
-
+					
 					// Only write when the information is availible, otherwise the system might
 					// see the memory as unavailible and use different slots.
-					if (Config.Health > 0 && speed > 0)
+
+					if (_speedDefaultValue <= 0)
 					{
-
-						if (_speedDefaultValue <= 0)
-						{
-							_speedDefaultValue = Config.Speed;
-						}
-
-						if (Config.EnableHealthHack && Config.Speed > 0)
-						{
-							// Health hack
-							Trainer.WriteDouble("magicka2", pointer, 1000);
-						}
-
-						// Speed hack
-						Trainer.WriteDouble("magicka2", pointer + 0x00F0, (Config.EnableSpeedHack) ? Config.Speed : _speedDefaultValue);
+						_speedDefaultValue = Trainer.ReadDouble("magicka2", pointer + 0x00F0);
 					}
+
+					if (Config.EnableHealthHack)
+					{
+						// Health hack
+						Trainer.WriteDouble("magicka2", pointer, 1000);
+					}
+
+					// Speed hack
+					Trainer.WriteDouble("magicka2", pointer + 0x00F0, (Config.EnableSpeedHack) ? Config.Speed : _speedDefaultValue);
 				}
 			}
 		}
